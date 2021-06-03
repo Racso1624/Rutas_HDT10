@@ -9,9 +9,7 @@ public class Graph {
     private int n;
     private int[][] matriz;
 
-    /* 
-     *  n numero de nodos
-     */
+    // Se crea el Constructor
     public Graph(int n) {
         this.n = n;
         matriz = new int[this.n][this.n];
@@ -23,17 +21,19 @@ public class Graph {
         }
     }
 
+    //Se inserta en la Matriz
     public void insert(int i, int j){
         matriz[i][j] += 1;
     }
 
+    //Se remueve una relacion de la matriz
     public void remove(int i, int j){
         if(matriz[i][j]>0)
             matriz[i][j] -= 1;
     }
     
+    //Se imprime la matriz
     public void printall(){
-
         for(int i=0; i< n; i++){
             System.out.print("\t");
             for(int j=0; j< n; j++){
@@ -44,6 +44,7 @@ public class Graph {
         }
     }
 
+    //Se imprime la matriz
     public void print(){
         for(int i=0; i< n; i++){
             for(int j=0; j< n; j++){
@@ -62,10 +63,13 @@ public class Graph {
             System.out.println();
         }
     }
+
+    //Se regresa la matriz
     public int[][] matrix(){
         return matriz;
     }
 
+    //Se regresa el valor de la relacion
     public int returnvalue(int a, int b){
         return matriz[a][b];
     }

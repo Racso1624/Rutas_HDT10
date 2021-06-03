@@ -9,6 +9,7 @@ import java.util.Scanner;
 * Carné 20679
 */
 
+//Se crea el Main
 public class Main {
 
     public static void main(String[] args) {
@@ -28,7 +29,7 @@ public class Main {
                 //Se realiza un contador
                 String data = myReader.nextLine();//Se toma la linea de texto
                 String[] datasplit = data.split(" ");//Se hace el split del texto
-                if(!hashMap.containsKey(datasplit[0])){
+                if(!hashMap.containsKey(datasplit[0])){//Se ingresa al HashMap para guardar los nombres
                     hashMap.put(datasplit[0], contador);
                     contador++;
                 }
@@ -37,7 +38,7 @@ public class Main {
                     contador++;
                 }
             }
-            graph = new Graph(contador);
+            graph = new Graph(contador);//Se crea el grafo
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado.");//Se muestra el error
@@ -53,9 +54,9 @@ public class Main {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();//Se toma la linea de texto
                 String[] datasplit = data.split(" ");//Se hace el split del texto
-                int distancia = Integer.parseInt(datasplit[2]);
+                int distancia = Integer.parseInt(datasplit[2]);//Se guarda la distancia
                 for(int i = 0; i < distancia; i++){
-                    graph.insert(hashMap.get(datasplit[0]), hashMap.get(datasplit[1]));
+                    graph.insert(hashMap.get(datasplit[0]), hashMap.get(datasplit[1]));//Se inserta en la matriz
                 }
             }
             myReader.close();
@@ -100,6 +101,7 @@ public class Main {
                         while(verificador == false){
                             try {
                                 int distancia = scanner.nextInt();
+                                //Se ingresa la ciudad al HaspMap
                                 if(!hashMap.containsKey(ciudad1)){
                                     hashMap.put(ciudad1, hashMap.size() - 1);
                                 }
