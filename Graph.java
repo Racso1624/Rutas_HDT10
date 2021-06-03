@@ -1,4 +1,7 @@
 /**
+ * Oscar Fernando López Barrios
+ * Carné 20679
+ * 
  * Codigo obtenido de https://www.youtube.com/watch?v=KwWu9sXdnaY
  **/
 public class Graph {

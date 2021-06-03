@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+/*
+* Oscar Fernando López Barrios
+* Carné 20679
+*/
+
 public class Main {
 
     public static void main(String[] args) {
@@ -17,7 +22,7 @@ public class Main {
         try {
             File obj = new File("guategrafo.txt");
             Scanner myReader = new Scanner(obj);
-            int contador = 1;
+            int contador = 0;
             //Si existe se hace un ciclo
             while (myReader.hasNextLine()) {
                 //Se realiza un contador
@@ -60,13 +65,14 @@ public class Main {
             System.exit(1);//Sale del programa
         }
 
-        System.out.println("\n\nEl grafo es:");
-        graph.printall();
 
         System.out.println("\nBienvenido al Calculador de Rutas");
         	
 		boolean var = false;
         a: while(var == false){//Se realiza el ciclo principal
+
+            System.out.println("\n\nEl grafo es:");
+            graph.printall();
      
             boolean var2 = false;
             while(var2 == false){
@@ -95,18 +101,38 @@ public class Main {
                             try {
                                 int distancia = scanner.nextInt();
                                 if(!hashMap.containsKey(ciudad1)){
-                                    hashMap.put(ciudad1, hashMap.size() + 1);
+                                    hashMap.put(ciudad1, hashMap.size() - 1);
                                 }
                                 if(!hashMap.containsKey(ciudad2)){
-                                    hashMap.put(ciudad2, hashMap.size() + 1);
+                                    hashMap.put(ciudad2, hashMap.size() - 1);
+                                }
+                                //Se busca si existe el archivo
+                                try {
+                                    File obj = new File("guategrafo.txt");
+                                    Scanner myReader = new Scanner(obj);
+                                    graph = new Graph(hashMap.size());
+                                    //Si existe se hace un ciclo
+                                    while (myReader.hasNextLine()) {
+                                        String data = myReader.nextLine();//Se toma la linea de texto
+                                        String[] datasplit = data.split(" ");//Se hace el split del texto
+                                        int distancia2 = Integer.parseInt(datasplit[2]);
+                                        for(int i = 0; i < distancia2; i++){
+                                            graph.insert(hashMap.get(datasplit[0]), hashMap.get(datasplit[1]));
+                                        }
+                                    }
+                                    myReader.close();
+                                } catch (FileNotFoundException e) {
+                                    System.out.println("Archivo no encontrado.");//Se muestra el error
+                                    e.printStackTrace();
+                                    System.exit(1);//Sale del programa
                                 }
                                 for(int i = 0; i < distancia; i++){
                                     graph.insert(hashMap.get(ciudad1), hashMap.get(ciudad2));
                                 }
-
                                 verificador = true;
                             } catch (InputMismatchException e) {
                                 System.out.println("Error, Ingrese un numero:");
+                                scanner.next();
                             }
                         }
                         var2 = true;

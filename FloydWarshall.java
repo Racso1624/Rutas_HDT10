@@ -1,6 +1,8 @@
 /*
-Codigo obtenido de https://www.sanfoundry.com/java-program-implement-floyd-warshall-algorithm/ 
-y de https://www.youtube.com/watch?v=xK0ShW9G-Ts
+* Oscar Fernando López Barrios
+* Carné 20679
+* Codigo obtenido de https://www.sanfoundry.com/java-program-implement-floyd-warshall-algorithm/ 
+* y de https://www.youtube.com/watch?v=xK0ShW9G-Ts
 */
  
 public class FloydWarshall{
@@ -68,8 +70,7 @@ public class FloydWarshall{
             }
         }
         
-         System.out.println("LA MATRIZ DE CAMINOS MAS CORTOS ENTRE LOS DIFERENTES VERTICES ES \n" +cadena+
-         "\n LOS DIFERENTES CAMINOS MAS CORTOS ENTRE VERTICES SON:\n"+caminitos);
+         System.out.println("\n LOS DIFERENTES CAMINOS MAS CORTOS ENTRE VERTICES SON:\n"+caminitos);
     }
     public String caminosR(int i, int k, String[][] caminosAuxiliares, String caminoRecorrido) {
         if(caminosAuxiliares[i][k].equals("")){
