@@ -11,7 +11,7 @@ public class Main {
         //Se instancian las variables y clases
         Scanner scanner = new Scanner(System.in);
         HashMap<String, Integer> hashMap = new HashMap<String, Integer>();
-        Grafo grafo;
+        Graph graph = null;
 
         //Se busca si existe el archivo
         try {
@@ -27,11 +27,12 @@ public class Main {
                     hashMap.put(datasplit[0], contador);
                     contador++;
                 }
-                else if(!hashMap.containsKey(datasplit[1])){
+                if(!hashMap.containsKey(datasplit[1])){
                     hashMap.put(datasplit[1], contador);
                     contador++;
                 }
             }
+            graph = new Graph(contador);
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Archivo no encontrado.");//Se muestra el error
@@ -45,11 +46,12 @@ public class Main {
             Scanner myReader = new Scanner(obj);
             //Si existe se hace un ciclo
             while (myReader.hasNextLine()) {
-                //Se realiza un contador
-                contador++;
                 String data = myReader.nextLine();//Se toma la linea de texto
                 String[] datasplit = data.split(" ");//Se hace el split del texto
-
+                int distancia = Integer.parseInt(datasplit[2]);
+                for(int i = 0; i < distancia; i++){
+                    graph.insert(hashMap.get(datasplit[0]), hashMap.get(datasplit[1]));
+                }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
@@ -58,7 +60,10 @@ public class Main {
             System.exit(1);//Sale del programa
         }
 
-        System.out.println("\nBienvenido al Traductor");
+        System.out.println("\n\nEl grafo es:");
+        graph.printall();
+
+        System.out.println("\nBienvenido al Calculador de Rutas");
         	
 		boolean var = false;
         a: while(var == false){//Se realiza el ciclo principal
@@ -75,10 +80,35 @@ public class Main {
                     int opcion = scanner.nextInt();//Se verifica el numero
 
                     if(opcion == 1){
-
+                        FloydWarshall floydWarshall = new FloydWarshall();
+                        floydWarshall.algoritmoFloyd(graph.matrix());
                         var2 = true;
                     }
                     else if(opcion == 2){
+                        System.out.println("Ingresa la Primera Ciudad:");
+                        String ciudad1 = scanner.next();
+                        System.out.println("Ingresa la Segunda Ciudad:");
+                        String ciudad2 = scanner.next();
+                        System.out.println("Ingresa la distancia entre las dos ciudades:");
+                        boolean verificador = false;
+                        while(verificador == false){
+                            try {
+                                int distancia = scanner.nextInt();
+                                if(!hashMap.containsKey(ciudad1)){
+                                    hashMap.put(ciudad1, hashMap.size() + 1);
+                                }
+                                if(!hashMap.containsKey(ciudad2)){
+                                    hashMap.put(ciudad2, hashMap.size() + 1);
+                                }
+                                for(int i = 0; i < distancia; i++){
+                                    graph.insert(hashMap.get(ciudad1), hashMap.get(ciudad2));
+                                }
+
+                                verificador = true;
+                            } catch (InputMismatchException e) {
+                                System.out.println("Error, Ingrese un numero:");
+                            }
+                        }
                         var2 = true;
                     }
                     else if(opcion == 3){

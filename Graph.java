@@ -1,7 +1,7 @@
 /**
  * Codigo obtenido de https://www.youtube.com/watch?v=KwWu9sXdnaY
  **/
-public class Grafo {
+public class Graph {
 
     private int n;
     private int[][] matriz;
@@ -9,7 +9,7 @@ public class Grafo {
     /* 
      *  n numero de nodos
      */
-    public Grafo(int n) {
+    public Graph(int n) {
         this.n = n;
         matriz = new int[this.n][this.n];
         //se inicializa matriz en 0
@@ -59,10 +59,11 @@ public class Grafo {
             System.out.println();
         }
     }
-    public int[][] mastriz(){
+    public int[][] matrix(){
         return matriz;
     }
-    public int regresarValor(int a, int b){
+
+    public int returnvalue(int a, int b){
         return matriz[a][b];
     }
 }
